@@ -1,12 +1,13 @@
 public class ValidPalindrome {
     public static void main(String args[]) {
         String s = "A man, a plan, a canal: Panama";
-        isPalindrome(s);
+        System.out.println(isPalindrome(s));
     }
     
     public static boolean isPalindrome(String s) {
         // sc
         if (s == null || s.length() == 0) return true;
+        s = s.toLowerCase();
         int lo = 0;
         int hi = s.length() - 1;
         while (lo < hi) {
