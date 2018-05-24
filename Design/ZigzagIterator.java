@@ -1,31 +1,32 @@
 import java.util.*;
 public class ZigzagIterator {
-    Queue<Integer> q;
+    Queue<Iterator> q = new LinkedList<>();
+    Iterator<Integer> iter;
     public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
-        q = new LinkedList<Integer>();
-        int i = 0;
-        int j = 0;
-        while (i < v1.size() || j < v2.size()) {
-            if (i < v1.size()) {
-                q.offer(v1.get(i));
-                i++;
-            }
-            
-            if (j < v2.size()) {
-                q.offer(v2.get(j));
-                j++;
-            }
-        }
+        if (v1 != null) q.add(v1.iterator());
+        if (v2 != null) q.add(v2.iterator());
+        this.iter = q.remove();
     }
 
     public int next() {
-        return q.poll();
+        int res = iter.next();
+        q.add(iter);
+        iter = q.remove();
+        return res;
     }
 
     public boolean hasNext() {
+        while (!iter.hasNext()) {
+            iter = q.remove();
+        }
         return !q.isEmpty();
     }
-    
+
+/**
+ * Your ZigzagIterator object will be instantiated and called as such:
+ * ZigzagIterator i = new ZigzagIterator(v1, v2);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
     public static void main(String args[]) {
         List<Integer> v1 = new ArrayList<Integer>();
         List<Integer> v2 = new ArrayList<Integer>();
