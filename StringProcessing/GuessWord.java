@@ -1,3 +1,12 @@
+// Zhen Xu, Phil
+// GWU @DC
+// Seattle-> kirkland
+// 250+
+// https://github.com/zhenxu92/UltimateInterviewPrep/branches
+// zhenxu92
+// linkedin/in/zhenxu92
+// github.com/zhenxu92
+// 
 import java.util.*;
 public class GuessWord {
     public static void main(String args[]) {
