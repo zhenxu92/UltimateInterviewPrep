@@ -31,6 +31,8 @@ public class SortCharByFreq {
                     sb.append(list.get(i));
                 }
             }
+            // created iterator every time, so it needs removing
+            // if iterator is created first, no need for removing
             map.remove(fq);
         }
         return sb.reverse().toString();
