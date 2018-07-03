@@ -15,22 +15,23 @@ public class LCA {
         System.out.println(c.serialize(root));
         TreeNode p = new TreeNode(5);
         TreeNode q = new TreeNode(4);
-        System.out.println(lowestCommonAncestor(root, p, q));
+        TreeNode res = lowestCommonAncestor(root, p, q);
+        if (res != null) {  
+            System.out.println(res.val);
+        } else {
+            System.out.println("no such node");
+        }
     }
     public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        helper(root, p, q);
-        return res;
+        if (root == null || root.val == p.val || root.val == q.val) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) return root;
+        if (left == null) {
+            return right;
+        } else {
+            return left;
+        }
     }
     
-    private static boolean helper(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) return false;
-        if (root.val == p.val || root.val == q.val) return true;
-        boolean left = helper(root.left, p, q);
-        boolean right = helper(root.right, p, q);
-        if (left && right) {
-            res = root;
-        }
-        if (left || right) return true;
-        return false;
-    }
 }
