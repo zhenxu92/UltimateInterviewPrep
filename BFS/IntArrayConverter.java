@@ -13,21 +13,31 @@
 // type. 
 
 import java.util.*;
+import javax.json.*;
+import java.util.regex.*;
 
 public class IntArrayConverter {
 
     private List<List<Integer>> list;
     public IntArrayConverter(String input) {
-        list = new ArrayList<>();
-        String[] arrs = input.split("[\\[,\\]]");
-        for (String arr : arrs) {
-            List<Integer> temp = new ArrayList<Integer>();
-            String[] nums = arr.split(",");
-            for (String num : nums) {
-                temp.add(Integer.parseInt(num));
+         list = new ArrayList<>();
+         String regex = "\\[?\\[((\\d,)+\\d)";
+         String[] arrs = input.split(regex);
+        // String[] arrs = input.split("[\\[,\\]]");
+        Pattern r = Pattern.compile(regex);
+        Matcher m = r.matcher(input);
+        while (m.find()) {
+            String temp = m.group(1);
+            List<Integer> tempList = new ArrayList<>();
+            String[] arr = temp.split(",");
+            for (String num : arr) {
+                tempList.add(Integer.parseInt(num));
             }
-            this.list.add(temp);
+            list.add(tempList);
         }
+//         JsonReader jsonReader = Json.createReader(new StringReader("[[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]]"));
+//         JsonArray array = jsonReader.readArray();
+//         jsonReader.close();
     }
 
     public int[][] convert() {
@@ -43,6 +53,11 @@ public class IntArrayConverter {
     }
 
     public static void main(String args[]) {
-        
+        IntArrayConverter iac = new IntArrayConverter("[[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]]");
+        int[][] maze = iac.convert();
+        for (int i = 0; i < maze.length; i++) {
+            System.out.println(Arrays.toString(maze[i]));        
+        }
+
     }
 }
