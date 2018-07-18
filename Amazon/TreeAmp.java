@@ -26,7 +26,7 @@ public class TreeAmp {
     }
     
     private static int helper2(TreeNode root, int min, int max) {
-        if (root == null)   return max - min;
+        if (root == null) return max - min;
         
         if (root.val < min) min = root.val;
         if (root.val > max) max = root.val;
