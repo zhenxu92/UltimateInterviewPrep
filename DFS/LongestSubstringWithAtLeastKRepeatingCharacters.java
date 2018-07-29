@@ -1,7 +1,7 @@
 // #395 Longest Substring with At Least K Repeating Characters
 public class LongestSubstringWithAtLeastKRepeatingCharacters {
     public static void main(String args[]) {
-        String s = "aabaacccabdceea";
+        String s = "aaabb";
         int k = 3;
         System.out.println(longestSubstring(s, 3));
     }
@@ -24,13 +24,19 @@ public class LongestSubstringWithAtLeastKRepeatingCharacters {
         int max = Integer.MIN_VALUE;
         int start = 0;
         int cur = 0;
+        System.out.println(s);
         while (cur < s.length()) {
-            if (freq[s.charAt(cur) - 'a'] < k) {
+            char c= s.charAt(cur);
+            if (freq[c - 'a'] < k) {
+                System.out.println(" " + "next level");
                 max = Math.max(longestSubstring(s.substring(start, cur), k), max);           
                 start = cur + 1;
             }
             cur++;
         }
+        // a wrong code test
+        // max = Math.max(max, s.length() - start);
+//         System.out.println(max);
         max = Math.max(max, longestSubstring(s.substring(start, s.length()), k));
         return max;
     }
